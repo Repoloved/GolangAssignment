@@ -47,7 +47,7 @@ func FormatFloat64ToRp(amount float64) string {
 
 }
 
-func FormatInt64ToRp(amount int64) string {
+func FormatIntToRp(amount int) string {
 
 	s := fmt.Sprintf("%d", amount)
 

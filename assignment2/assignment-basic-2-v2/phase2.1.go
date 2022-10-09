@@ -5,8 +5,8 @@ import (
 	"GolangAssignment/rupiah"
 )
 
-func FormatRupiah(number int64) string {
-    hitung := rupiah.FormatInt64ToRp(number)
+func FormatRupiah(number int) string {
+    hitung := rupiah.FormatIntToRp(number)
 	return hitung
 }
 
