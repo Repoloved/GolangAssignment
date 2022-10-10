@@ -17,11 +17,11 @@ func GetDayDifference(date string)int {
 	end_date := splitmin[1]
 	date1, _ := time.Parse(TextDate, start_date)
 	date2, _ := time.Parse(TextDate, end_date)
-	days := int(math.Ceil(date2.Sub(date1).Hours() / 24))
+	days := int(math.Ceil(date2.Sub(date1).Hours() / 24) + 1)
 	return days
 }
 
 func main() {
-	res := GetDayDifference("21 February - 23 February 2021")
+    res := GetDayDifference("25 January - 30 January 2021")
     fmt.Println(res)
 }
