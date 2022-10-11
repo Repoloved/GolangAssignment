@@ -10,6 +10,7 @@ import (
 // date time format layout
 const TextDate = "2 January 2006"
 
+// ! NOTE: Count Days
 func GetDayDifference(date string) int {
 	splitmin := strings.Split(date, " - ")
 	splitspace := strings.Split(date, " ")
@@ -21,6 +22,7 @@ func GetDayDifference(date string) int {
 	return days
 }
 
+// ! NOTE: Present Employee
 func GetSalary(rangeDay int, data [][]string) map[string]string {
 	return nil // TODO: replace this
 }
@@ -28,12 +30,19 @@ func GetSalary(rangeDay int, data [][]string) map[string]string {
 // Optional, kalian bisa membuat fungsi helper seperti berikut, untuk menerapkan DRY principle
 // fungsi helper untuk mengubah int ke currency Rupiah
 // example: int 1000 => Rp 1.000
+// ! Convert int to Format Rupiah
 func FormatRupiah(number int) string {
-	return "" // TODO: replace this
+	hitung := rupiah.FormatIntToRp(number)
+	return hitung
 }
 
-func GetSalaryOverview(dateRange string, data [][]string) map[string]string {
-	return nil // TODO: replace this
+func GetSalaryOverview(dateRange int, data [][]string) map[string]string {
+	var money
+	var name
+
+	dateRange = GetDayDifference()
+	data = make(map[string] string)
+	data[name] = dateRange * money
 }
 
 func main() {
