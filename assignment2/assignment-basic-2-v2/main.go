@@ -24,7 +24,14 @@ func GetDayDifference(date string) int {
 
 // ! NOTE: Present Employee
 func GetSalary(rangeDay int, data [][]string) map[string]string {
-	return nil // TODO: replace this
+	var money
+	var name
+
+	rangeDay = GetDayDifference()
+	data = make(map[string] string)
+	data[name] = rangeDay * money
+
+	return date
 }
 
 // Optional, kalian bisa membuat fungsi helper seperti berikut, untuk menerapkan DRY principle
@@ -33,16 +40,12 @@ func GetSalary(rangeDay int, data [][]string) map[string]string {
 // ! Convert int to Format Rupiah
 func FormatRupiah(number int) string {
 	hitung := rupiah.FormatIntToRp(number)
+	
 	return hitung
 }
 
 func GetSalaryOverview(dateRange int, data [][]string) map[string]string {
-	var money
-	var name
 
-	dateRange = GetDayDifference()
-	data = make(map[string] string)
-	data[name] = dateRange * money
 }
 
 func main() {
