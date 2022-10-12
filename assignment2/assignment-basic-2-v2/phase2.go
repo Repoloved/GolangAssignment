@@ -8,7 +8,6 @@ import (
 	"GolangAssignment/rupiah"
 )
 
-// date time format layout
 const TextDate = "2 January 2006"
 
 // ! NOTE: Count Days
@@ -23,6 +22,11 @@ func GetDayDifference(date string) int {
 	return days
 }
 
+func FormatRupiah(number int) string {
+	hitung := rupiah.FormatIntToRp(number)
+	
+	return hitung
+}
 
 func GetSalary(rangeDay int, data [][]string) map[string]string {
     var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
@@ -54,49 +58,8 @@ func GetSalary(rangeDay int, data [][]string) map[string]string {
     return totalgaji
 }
 
-// Optional, kalian bisa membuat fungsi helper seperti berikut, untuk menerapkan DRY principle
-// fungsi helper untuk mengubah int ke currency Rupiah
-// example: int 1000 => Rp 1.000
-// ! Convert int to Format Rupiah
-func FormatRupiah(number int) string {
-	hitung := rupiah.FormatIntToRp(number)
-	
-	return hitung
-}
-
-func GetSalaryOverview(dateRange string, data [][]string) map[string]string {
-	countDay := GetDayDifference(dateRange)
-    var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
-	var person1, person2, person3, person4 string
-    for i := 0; i < countDay; i++ {
-		capPerson = cap(data[i])
-		for j := 0; j < capPerson; j++ {
-			hasil := data [i][j]
-            person1 = "andi"
-			person2 = "Rojaki"
-			person3 = "raji"
-			person4 = "supri"
-            if strings.Contains(hasil, person1){
-				moneyandi += 50000
-				} else if strings.Contains(hasil, person2){
-					moneyRojaki += 50000
-					} else if strings.Contains(hasil, person3){
-						moneyraji += 50000
-						} else if strings.Contains(hasil, person4){
-							moneysupri += 50000
-						}
-		}
-	}
-	gajiandi := FormatRupiah(moneyandi)
-	gajiRojaki := FormatRupiah(moneyRojaki)
-	gajiraji := FormatRupiah(moneyraji)
-	gajisupri := FormatRupiah(moneysupri)
-    totalgaji := map[string]string{person1: gajiandi, person2: gajiRojaki, person3: gajiraji, person4: gajisupri}
-    return totalgaji
-}
-
 func main() {
-	res := GetSalaryOverview("21 February - 23 February 2021",[][]string{
+	res := GetSalary(3,[][]string{
 		{"andi", "Rojaki", "raji", "supri"},
 		{"andi", "Rojaki", "raji"},
 		{"andi", "raji", "supri"},

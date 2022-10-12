@@ -21,5 +21,11 @@ type Detail struct {
 }
 
 func (fi FinanceInvoice) RecordInvoice() (InvoiceData, error) {
-	return InvoiceData{}, nil // TODO: replace this
+	return InvoiceData{},
+	var invoice1 FinanceInvoice
+	
+	invoice1.Date = "01/01/2022"
+	invoice1.Status = PAID
+	invoice1.Approved = true
+	invoice1.Details = "Details "
 }
