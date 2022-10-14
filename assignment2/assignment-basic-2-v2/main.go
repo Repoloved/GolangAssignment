@@ -23,7 +23,7 @@ func GetDayDifference(date string) int {
 	return days
 }
 
-
+// ! NOTE: Count money of Employees present (GetSalary function  with int parameter)
 func GetSalary(rangeDay int, data [][]string) map[string]string {
     var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
 	var person1, person2, person3, person4 string
@@ -64,6 +64,7 @@ func FormatRupiah(number int) string {
 	return hitung
 }
 
+// ! NOTE: Count money of Employees present (GetSalary function  with string parameter)
 func GetSalaryOverview(dateRange string, data [][]string) map[string]string {
 	countDay := GetDayDifference(dateRange)
     var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
@@ -87,13 +88,17 @@ func GetSalaryOverview(dateRange string, data [][]string) map[string]string {
 						}
 		}
 	}
+
 	gajiandi := FormatRupiah(moneyandi)
 	gajiRojaki := FormatRupiah(moneyRojaki)
 	gajiraji := FormatRupiah(moneyraji)
 	gajisupri := FormatRupiah(moneysupri)
     totalgaji := map[string]string{person1: gajiandi, person2: gajiRojaki, person3: gajiraji, person4: gajisupri}
+	
     return totalgaji
 }
+
+
 
 func main() {
 	res := GetSalaryOverview("21 February - 23 February 2021",[][]string{

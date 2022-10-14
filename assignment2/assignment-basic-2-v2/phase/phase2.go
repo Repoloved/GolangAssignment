@@ -59,7 +59,7 @@ func GetSalary(rangeDay int, data [][]string) map[string]string {
 }
 
 func main() {
-	res := GetSalary(3,[][]string{
+	res := GetSalary(3, [][]string{
 		{"andi", "Rojaki", "raji", "supri"},
 		{"andi", "Rojaki", "raji"},
 		{"andi", "raji", "supri"},
