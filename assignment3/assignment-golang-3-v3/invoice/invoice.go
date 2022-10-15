@@ -16,9 +16,5 @@ const (
 
 type Invoice interface {
 	RecordInvoice() (InvoiceData, error)
-}
-
-// ! Finance Method
-func Finance(){
-	
+	GetApproved() bool
 }

@@ -40,6 +40,14 @@ func (wi WarehouseInvoice) TotalInvoice() float64 {
 	return total
 }
 
+func (wi WarehouseInvoice) GetInvoiceType() InvoiceTypeName {
+	return wi.InvoiceType
+}
+
+func (wi WarehouseInvoice) GetApproved() bool {
+	return wi.Approved
+}
+
 func (wi WarehouseInvoice) RecordInvoice() (InvoiceData, error) {
 	if strings.TrimSpace(wi.Date) == "" {
 		return InvoiceData{}, errors.New("invoice date is empty")

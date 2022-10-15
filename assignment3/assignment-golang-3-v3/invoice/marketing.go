@@ -35,6 +35,10 @@ func (mi MarketingInvoice) TotalInvoice() float64 {
 	return mi.TotalDay()*float64(mi.PricePerDay) + float64(mi.AnotherFee)
 }
 
+func (mi MarketingInvoice) GetApproved() bool {
+	return mi.Approved
+}
+
 func (mi MarketingInvoice) RecordInvoice() (InvoiceData, error) {
 
 	if mi.Date == "" {

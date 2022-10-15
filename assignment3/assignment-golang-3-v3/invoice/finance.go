@@ -33,6 +33,14 @@ func (fi FinanceInvoice) TotalInvoice() float64 {
 	return total
 }
 
+func (fi FinanceInvoice) GetStatus() InvoiceStatus {
+	return fi.Status
+}
+
+func (fi FinanceInvoice) GetApproved() bool {
+	return fi.Approved
+}
+
 func (fi FinanceInvoice) RecordInvoice() (InvoiceData, error) {
 
 	if strings.TrimSpace(fi.Date) == "" {
