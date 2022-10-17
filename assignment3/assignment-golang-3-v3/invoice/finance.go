@@ -1,5 +1,10 @@
 package invoice
 
+import (
+	"errors"
+	"strings"
+)
+
 // Finance invoice
 type FinanceInvoice struct {
 	Date     string
@@ -20,12 +25,47 @@ type Detail struct {
 	Total       int
 }
 
+func (fi FinanceInvoice) TotalInvoice() float64 {
+	var total float64
+	for _, detail := range fi.Details {
+		total += float64(detail.Total)
+	}
+	return total
+}
+
+func (fi FinanceInvoice) GetStatus() InvoiceStatus {
+	return fi.Status
+}
+
+func (fi FinanceInvoice) GetApproved() bool {
+	return fi.Approved
+}
+
 func (fi FinanceInvoice) RecordInvoice() (InvoiceData, error) {
-	return InvoiceData{},
-	var invoice1 FinanceInvoice
-	
-	invoice1.Date = "01/01/2022"
-	invoice1.Status = PAID
-	invoice1.Approved = true
-	invoice1.Details = "Details "
+
+	if strings.TrimSpace(fi.Date) == "" {
+		return InvoiceData{}, errors.New("invoice date is empty")
+	}
+
+	if len(fi.Details) == 0 {
+		return InvoiceData{}, errors.New("invoice details is empty")
+	}
+
+	if fi.Status == "" || (fi.Status != PAID && fi.Status != UNPAID) {
+		return InvoiceData{}, errors.New("invoice status is not valid")
+	}
+
+	for d := range fi.Details {
+		if fi.Details[d].Total <= 0 {
+			return InvoiceData{}, errors.New("total price is not valid")
+		}
+	}
+
+	var invoiceData InvoiceData
+
+	invoiceData.Date = formatDate(fi.Date)
+	invoiceData.TotalInvoice = fi.TotalInvoice()
+	invoiceData.Departemen = Finance
+
+	return invoiceData, nil
 }
