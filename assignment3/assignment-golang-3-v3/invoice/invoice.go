@@ -16,4 +16,5 @@ const (
 
 type Invoice interface {
 	RecordInvoice() (InvoiceData, error)
+	GetApproved() bool
 }
