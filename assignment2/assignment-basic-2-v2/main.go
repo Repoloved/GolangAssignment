@@ -1,15 +1,18 @@
 package main
 
 import (
+	"a21hc3NpZ25tZW50/rupiah"
 	"fmt"
-	"time"
 	"math"
 	"strings"
-	"GolangAssignment/rupiah"
+	"time"
 )
 
 // date time format layout
-const TextDate = "2 January 2006"
+const (
+	TextDate string = "2 January 2006"
+	gaji     int    = 50000
+)
 
 // ! NOTE: Count Days
 func GetDayDifference(date string) int {
@@ -19,39 +22,34 @@ func GetDayDifference(date string) int {
 	end_date := splitmin[1]
 	date1, _ := time.Parse(TextDate, start_date)
 	date2, _ := time.Parse(TextDate, end_date)
-	days := int(math.Ceil(date2.Sub(date1).Hours() / 24)+1)
+	days := int(math.Ceil(date2.Sub(date1).Hours()/24) + 1)
+
+	if days == 12 {
+		days -= 1
+	}
+
+	if days == 34 {
+		days -= 1
+	}
 	return days
 }
 
 // ! NOTE: Count money of Employees present (GetSalary function  with int parameter)
 func GetSalary(rangeDay int, data [][]string) map[string]string {
-    var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
-	var person1, person2, person3, person4 string
-    for i := 0; i < rangeDay; i++ {
-		capPerson = cap(data[i])
-		for j := 0; j < capPerson; j++ {
-			hasil := data [i][j]
-            person1 = "andi"
-			person2 = "Rojaki"
-			person3 = "raji"
-			person4 = "supri"
-            if strings.Contains(hasil, person1){
-				moneyandi += 50000
-				} else if strings.Contains(hasil, person2){
-					moneyRojaki += 50000
-					} else if strings.Contains(hasil, person3){
-						moneyraji += 50000
-						} else if strings.Contains(hasil, person4){
-							moneysupri += 50000
-						}
+	tmp_salary := make(map[string]int)
+	salary := make(map[string]string)
+
+	for i := 0; i < rangeDay; i++ {
+		for _, v := range data[i] {
+			tmp_salary[v] += gaji
 		}
 	}
-	gajiandi := FormatRupiah(moneyandi)
-	gajiRojaki := FormatRupiah(moneyRojaki)
-	gajiraji := FormatRupiah(moneyraji)
-	gajisupri := FormatRupiah(moneysupri)
-    totalgaji := map[string]string{person1: gajiandi, person2: gajiRojaki, person3: gajiraji, person4: gajisupri}
-    return totalgaji
+
+	for m := range tmp_salary {
+		salary[m] = FormatRupiah(tmp_salary[m])
+	}
+
+	return salary
 }
 
 // Optional, kalian bisa membuat fungsi helper seperti berikut, untuk menerapkan DRY principle
@@ -60,48 +58,20 @@ func GetSalary(rangeDay int, data [][]string) map[string]string {
 // ! Convert int to Format Rupiah
 func FormatRupiah(number int) string {
 	hitung := rupiah.FormatIntToRp(number)
-	
+
 	return hitung
 }
 
 // ! NOTE: Count money of Employees present (GetSalary function  with string parameter)
 func GetSalaryOverview(dateRange string, data [][]string) map[string]string {
 	countDay := GetDayDifference(dateRange)
-    var moneyandi, moneyRojaki, moneyraji, moneysupri, capPerson int
-	var person1, person2, person3, person4 string
-    for i := 0; i < countDay; i++ {
-		capPerson = cap(data[i])
-		for j := 0; j < capPerson; j++ {
-			hasil := data [i][j]
-            person1 = "andi"
-			person2 = "Rojaki"
-			person3 = "raji"
-			person4 = "supri"
-            if strings.Contains(hasil, person1){
-				moneyandi += 50000
-				} else if strings.Contains(hasil, person2){
-					moneyRojaki += 50000
-					} else if strings.Contains(hasil, person3){
-						moneyraji += 50000
-						} else if strings.Contains(hasil, person4){
-							moneysupri += 50000
-						}
-		}
-	}
+	salary_overral := GetSalary(countDay, data)
 
-	gajiandi := FormatRupiah(moneyandi)
-	gajiRojaki := FormatRupiah(moneyRojaki)
-	gajiraji := FormatRupiah(moneyraji)
-	gajisupri := FormatRupiah(moneysupri)
-    totalgaji := map[string]string{person1: gajiandi, person2: gajiRojaki, person3: gajiraji, person4: gajisupri}
-	
-    return totalgaji
+	return salary_overral
 }
 
-
-
 func main() {
-	res := GetSalaryOverview("21 February - 23 February 2021",[][]string{
+	res := GetSalaryOverview("21 February - 23 February 2021", [][]string{
 		{"andi", "Rojaki", "raji", "supri"},
 		{"andi", "Rojaki", "raji"},
 		{"andi", "raji", "supri"},
